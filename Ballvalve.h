@@ -1,14 +1,15 @@
 /*
-  BALLVALVE.h - Control Library for the AIR/WATER/GAS Ball Valves 
+  Ballvalve.h - Control Library for the AIR/WATER/GAS Ball Valves 
   This one designed around the U.S.SOLID 5 Wire 
   USS-MSV00015 5 Wire Model with Full OPEN/CLOSED Status 
   Functionality requires the addition of a standard Relay module
   Copyright (c) 2020 Jordan Rubin.  All rights reserved.
-  Functionality requires the addition of a standard Relay module*/
+  Functionality requires the addition of a standard Relay module
+*/
 
 // ensure this library description is only included once
-#ifndef BALLVALVE_h
-#define BALLVALVE_h
+#ifndef Ballvalve_h
+#define Ballvalve_h
 
 // include types & constants of Wiring core API
 
@@ -31,10 +32,6 @@ class FIVEWIREVALVE
 
   ////////////// library-accessible "private" interface
   private:
-    int value;
-//    void loadConstants(void);
-//    Print* printer;
-    
 };
 
 #endif
