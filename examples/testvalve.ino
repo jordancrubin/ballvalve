@@ -1,13 +1,13 @@
-/*
-  testvalve.ino / .cpp - Test program for the 5 wire Ball valve Library 
+ /*
+  Ballvalve.h - Control Library for the AIR/WATER/GAS Ball Valves 
   This one designed around the U.S.SOLID 5 Wire 
   USS-MSV00015 5 Wire Model with Full OPEN/CLOSED Status 
-  Functionality requires the addition of a standard DPDT Relay module and
-  a 24V DC power source recommended for low current operation.
+  Functionality requires the addition of a standard DPDT Relay module
+  https://www.youtube.com/c/jordanrubin6502
   2020 Jordan Rubin.
-  */
+*/
 
-#include <Arduino.h> // Enable for Platform.io
+// #include <Arduino.h> // Enable for Platform.io
 #include <Ballvalve.h>
 
 // New Instance (RelayGPIOpin, openStatusGPIOpin, closeStatusGPIOpin, useInternalPullups, maxTravelTime)
