@@ -1,13 +1,14 @@
 /*
-  BALLVALVE.h - Control Library for the AIR/WATER/GAS Ball Valves 
+  Ballvalve.h - Control Library for the AIR/WATER/GAS Ball Valves 
   This one designed around the U.S.SOLID 5 Wire 
   USS-MSV00015 5 Wire Model with Full OPEN/CLOSED Status 
-  Functionality requires the addition of a standard Relay module
-  Copyright (c) 2020 Jordan Rubin.  All rights reserved.
-  Functionality requires the addition of a standard Relay module*/
+  Functionality requires the addition of a standard DPDT Relay module
+  https://www.youtube.com/c/jordanrubin6502
+  2020 Jordan Rubin.
+*/
 
-#include "Arduino.h"
-#include "BALLVALVE.h"
+// #include "Arduino.h" // Include for Platform.io
+#include "Ballvalve.h"
 
 int maxTraveltime;
 char version[6] = "1.0.0";
@@ -39,7 +40,7 @@ FIVEWIREVALVE::FIVEWIREVALVE(int RelayGPIOpin, int openStatusGPIOpin, int closeS
 FIVEWIREVALVE::FIVEWIREVALVE(int RelayGPIOpin, int openStatusGPIOpin, int closeStatusGPIOpin, bool useInternalPullups)
 {
   //----------------- initialize initial parameters
-	maxTraveltime = defaultMaxtravelTime;
+  maxTraveltime = defaultMaxtravelTime;
   if (useInternalPullups){
     pinMode(openStatusGPIOpin, INPUT_PULLDOWN);
     pinMode(closeStatusGPIOpin, INPUT_PULLDOWN);
@@ -79,7 +80,6 @@ int FIVEWIREVALVE::getMaxTravelTime(void){
 
 // FUNCTION - [getVersion] - Returns current Library revision------------------]
 void FIVEWIREVALVE::setMaxTraveltime(int time){
-
   maxTraveltime = time;
 }
 // ----------------------------------------------------------------------------]
