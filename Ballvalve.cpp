@@ -1,5 +1,5 @@
 /*
-  Ballvalve.h - Control Library for the AIR/WATER/GAS Ball Valves 
+  Ballvalve.cpp - Control Library for the AIR/WATER/GAS Ball Valves 
   This one designed around the U.S.SOLID 5 Wire 
   USS-MSV00015 5 Wire Model with Full OPEN/CLOSED Status 
   Functionality requires the addition of a standard DPDT Relay module
