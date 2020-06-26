@@ -12,6 +12,7 @@
 #include "Ballvalve.h"
 
 int maxTraveltime;
+unsigned long opentime,closetime;
 bool usePowerRelay = false;
 char version[6] = "1.0.0";
 int defaultMaxtravelTime = 8;
@@ -74,6 +75,14 @@ char* FIVEWIREVALVE::getValvePosition(void){
 }
 // ----------------------------------------------------------------------------]
 
+// FUNCTION - [getLastDuration] - [OPEN/CLOSE] Returns OPEN/CLOSE time---------]
+int FIVEWIREVALVE::getLastDuration(char* position){
+	  if (position == "OPEN"){return opentime;}
+    else if (position == "CLOSED"){return closetime;}
+    else {return 0;}
+}
+// ----------------------------------------------------------------------------]
+
 // FUNCTION - [getMaxTravelTime] - Returns MaxTravelTime-----------------------]
 int FIVEWIREVALVE::getMaxTravelTime(void){
 	return maxTraveltime;
@@ -89,6 +98,9 @@ void FIVEWIREVALVE::setMaxTraveltime(int time){
 // FUNCTION - [setValvePosition] -[OPEN/CLOSE]---------------------------------]
 char* FIVEWIREVALVE::setValvePosition(char* position){	
   int count = 0;
+  unsigned long starttime;
+  unsigned long endtime;
+  starttime = millis();
   if (usePowerRelay == true){
    if (position == "OPEN"){
       if (strcmp(getValvePosition(),"OPEN")==0){return "Already Open";}
@@ -125,6 +137,8 @@ char* FIVEWIREVALVE::setValvePosition(char* position){
         if (count > maxTraveltime){return "Error";}
         count++;
       }
+    endtime = millis(); 
+    opentime = (endtime - starttime) /1000;    
     return "OPENED";
     }
     if (position == "CLOSED"){
@@ -135,6 +149,8 @@ char* FIVEWIREVALVE::setValvePosition(char* position){
         if (count > maxTraveltime){return "Error";}
         count++;
       }   
+    endtime = millis();
+    closetime = (endtime - starttime) / 1000;
     return "CLOSED";   
     }
     return "ERR";

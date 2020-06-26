@@ -20,6 +20,7 @@ class FIVEWIREVALVE
   public:
     FIVEWIREVALVE(int,int,int,bool,int);
     FIVEWIREVALVE(int,int,int,bool);
+    int getLastDuration(char*);
     int getMaxTravelTime(void);
     char* getValvePosition(void); 
     void setMaxTraveltime(int);

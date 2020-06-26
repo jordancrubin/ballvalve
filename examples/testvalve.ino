@@ -27,19 +27,34 @@
 FIVEWIREVALVE thisValve(16,17,18,true);
 
 void setup() {
- Serial.begin(38400);
- thisValve.setMaxTraveltime(9);  // If you do not set a travel time, the default is 8 seconds.
+  Serial.begin(38400);
+// If you do not set a travel time, the default is 8 seconds.  This is the maximum amount of time it should take to
+// get from open to closed or closed to open.  The function checks between both stops when setValvePosition executes.
+// If the time taken should exceed this value, an ERROR will be returned as a statusn through the valve still might 
+// have eventually reached the full position.  This can be seperately polled later to see if it is stuck with the
+// getValvePosition function.  Your program should incorperate this polling or alarm on error. 
+  thisValve.setMaxTraveltime(9);  
+  Serial.println("\n\n***VALVE DEMO PROGRAMME***\n\n");
 }
 
-void loop() {
-    delay(10000);
-    Serial.println("START CYCLE\n\n");
+void loop() {   
+    Serial.println("\nSTART CYCLE----------------------|");
+    // Returns the MaxTravelTime value in seconds either the default or the one set by setMaxTraveltime.
     Serial.print("Max Travel Time set to: "); Serial.println(thisValve.getMaxTravelTime());
+    //Returns the current position of the value.  OPEN / CLOSED / or MIDWAY
     Serial.print("Valve position currently: "); Serial.println(thisValve.getValvePosition());
     delay(1000);
-    Serial.println("OPENING REQUEST->\n\n");
+    Serial.print("OPENING REQUEST-> ");
+    // Orchestrates the opening of the valve, incorperates the OPEN/CLOSE sense and maxtime
     Serial.println(thisValve.setValvePosition("OPEN"));
-    delay(10000);
-    Serial.println("CLOSING REQUEST->\n\n");
+    delay(45000);
+    Serial.print("CLOSING REQUEST-> ");
+    // Orchestrates the closing of the valve, incorperates the OPEN/CLOSE sense and maxtime
     Serial.println(thisValve.setValvePosition("CLOSED"));
+    // Returns the duration of the LAST sucessful OPEN and CLOSE event in seconds, allowing a program to
+    // Re-calibrate the MaxTravelTime if need be.
+    Serial.print("Last OPEN  took: "); Serial.print(thisValve.getLastDuration("OPEN")); Serial.println(" seconds.");
+    Serial.print("Last CLOSE took: "); Serial.print(thisValve.getLastDuration("CLOSED")); Serial.println(" seconds.");
+    Serial.println("|------------------------END CYCLE\n");
+    delay(45000);
 }
