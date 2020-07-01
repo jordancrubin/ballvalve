@@ -1,0 +1,20 @@
+###########################################
+# Syntax Coloring Map For Ballvalve
+###########################################
+
+###########################################
+# Datatypes (KEYWORD1)
+###########################################
+
+Ballvalve KEYWORD1
+FIVEWIREVALVE KEYWORD1
+
+###########################################
+# Methods and Functions (KEYWORD2)
+###########################################
+
+getMaxTravelTime  KEYWORD2
+getValvePosition  KEYWORD2
+getLastDuration KEYWORD2
+setMaxTraveltime  KEYWORD2
+setValvePosition  KEYWORD2
