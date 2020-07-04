@@ -39,10 +39,9 @@ FIVEWIREVALVE(int,int,int,bool);
   
   getLastDuration(OPEN|CLOSED) - Returs the number of seconds of the last sucessful execution of this action. This can be used to refactor into setMaxTraveltime plus the addition of a buffer of 1 or more seconds.
 
-
+  get MaxtravelTime() - Returns the currently set value of MaxTravelTime in seconds.
   
-
-    char* getValvePosition(void); 
-    void setMaxTraveltime(int);
-    char* setValvePosition(char*);
+  getValvePosition() - Retuens one of three possible valve positions, OPEN/CLOSED/MIDWAY
+  
+  setValvePosition(OPEN|CLOSED) - Runs all of the routines to set the valve from OPEN to CLOSED or vice versa.
 
