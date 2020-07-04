@@ -111,7 +111,9 @@ char* FIVEWIREVALVE::setValvePosition(char* position){
         if (count > maxTraveltime){digitalWrite(powerRelay,LOW); return "Error";}
         count++;
       }
-    digitalWrite(powerRelay,LOW); 
+    digitalWrite(powerRelay,LOW);
+    endtime = millis(); 
+    opentime = (endtime - starttime) /1000; 
     return "OPENED";
     }
     if (position == "CLOSED"){
@@ -123,7 +125,9 @@ char* FIVEWIREVALVE::setValvePosition(char* position){
         if (count > maxTraveltime){digitalWrite(powerRelay,LOW); return "Error";}
         count++;
       }   
-    digitalWrite(powerRelay,LOW);  
+    digitalWrite(powerRelay,LOW);
+    endtime = millis();
+    closetime = (endtime - starttime) / 1000;  
     return "CLOSED";   
     }
     return "ERR";
