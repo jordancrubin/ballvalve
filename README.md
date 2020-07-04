@@ -29,6 +29,7 @@ FIVEWIREVALVE(int,int,int,bool,int);
   
     CONSTRUCTOR: [without power relay]
 FIVEWIREVALVE(RelayGPIOpin,StartStatusGPIOpin,StopStatusGPIOpin,useInternalPullups)
+
 FIVEWIREVALVE(int,int,int,bool);
 
   
