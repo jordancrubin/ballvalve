@@ -17,20 +17,20 @@ The remaining three wires , common open and closed sense support the position of
 
     CONSTRUCTOR: [with power relay]
 FIVEWIREVALVE(RelayGPIOpin,StartStatusGPIOpin,StopStatusGPIOpin,useInternalPullups,powerGPIOpin)
+FIVEWIREVALVE(int,int,int,bool,int);
 
-Ballvalve only contains one flavour of constructor, FIVEWIREVALVE, bacuase i dont collect these things, as I come across another one, ill add it.
+'Ballvalve only contains one flavour of constructor, FIVEWIREVALVE, bacuase i dont collect these things, as I come across another one, ill add it.'
 
-  RelayGPIOpin -        This is the GPIO for the DPDT relay [which needs to be wired as a flipflip, see video]
+  RelayGPIOpin       -  This is the GPIO for the DPDT relay [which needs to be wired as a flipflip, see video]
   StartStatusGPIOpin -  This is the GPIO for the Closed position sense line
   StopStatusGPIOpin  -  This is the GPIO for the Opened position sense line
   useInternalPullups -  If you have an ESP32 and want to use internal pullup resistors instead of your own, set to true
   powerGPIOpin       -  This is the GPIO for the optional power relay, only supply this if using a power relay
   
     CONSTRUCTOR: [without power relay]
-  FIVEWIREVALVE(RelayGPIOpin,StartStatusGPIOpin,StopStatusGPIOpin,useInternalPullups)
-  
-    FIVEWIREVALVE(int,int,int,bool,int);
-    FIVEWIREVALVE(int,int,int,bool);
+FIVEWIREVALVE(RelayGPIOpin,StartStatusGPIOpin,StopStatusGPIOpin,useInternalPullups)
+FIVEWIREVALVE(int,int,int,bool);
+
   
   
   
