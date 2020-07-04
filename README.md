@@ -15,11 +15,11 @@ The particular motor being used for this project is the US SOLID USSMSV00015 Thi
 The remaining three wires , common open and closed sense support the position of the valve, OPEN/CLOSED or MIDWAY.  Which can be queried through the library and are also used by other functions of the library for operation.
 
 
-    CONSTRUCTOR:
+    CONSTRUCTOR: [with power relay]
+FIVEWIREVALVE(RelayGPIOpin,StartStatusGPIOpin,StopStatusGPIOpin,useInternalPullups,powerGPIOpin)
+
 Ballvalve only contains one flavour of constructor, FIVEWIREVALVE, bacuase i dont collect these things, as I come across another one, ill add it.
 
-
-  FIVEWIREVALVE(RelayGPIOpin,StartStatusGPIOpin,StopStatusGPIOpin,useInternalPullups,powerGPIOpin)
   RelayGPIOpin -        This is the GPIO for the DPDT relay [which needs to be wired as a flipflip, see video]
   StartStatusGPIOpin -  This is the GPIO for the Closed position sense line
   StopStatusGPIOpin  -  This is the GPIO for the Opened position sense line
