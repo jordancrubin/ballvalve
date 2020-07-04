@@ -17,6 +17,7 @@ The remaining three wires , common open and closed sense support the position of
 
     CONSTRUCTOR: [with power relay]
 FIVEWIREVALVE(RelayGPIOpin,StartStatusGPIOpin,StopStatusGPIOpin,useInternalPullups,powerGPIOpin)
+
 FIVEWIREVALVE(int,int,int,bool,int);
 
 'Ballvalve only contains one flavour of constructor, FIVEWIREVALVE, bacuase i dont collect these things, as I come across another one, ill add it.'
@@ -29,17 +30,18 @@ FIVEWIREVALVE(int,int,int,bool,int);
   
     CONSTRUCTOR: [without power relay]
 FIVEWIREVALVE(RelayGPIOpin,StartStatusGPIOpin,StopStatusGPIOpin,useInternalPullups)
+
 FIVEWIREVALVE(int,int,int,bool);
 
   
   
+  setMaxTraveltime(int)  - This should be set in setup, default value is 8 seconds.  This is the amount of time of an OPEN/CLOSE operation request runs before an error is returned.  You can have a program figure this normal value out from the getLastDuration() function.
+  
+  getLastDuration(OPEN|CLOSED) - Returs the number of seconds of the last sucessful execution of this action. This can be used to refactor into setMaxTraveltime plus the addition of a buffer of 1 or more seconds.
+
+
   
 
-
-  
-
-    int getLastDuration(char*);
-    int getMaxTravelTime(void);
     char* getValvePosition(void); 
     void setMaxTraveltime(int);
     char* setValvePosition(char*);
