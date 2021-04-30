@@ -5,6 +5,7 @@
   Functionality requires the addition of a standard DPDT Relay module
   and 24VDC power supply
   https://www.youtube.com/c/jordanrubin6502
+  Project Video:  https://www.youtube.com/watch?v=yC6QS6Ac-z0
   2020 Jordan Rubin.
   */
 
@@ -20,11 +21,11 @@ class FIVEWIREVALVE
   public:
     FIVEWIREVALVE(int,int,int,bool,int);
     FIVEWIREVALVE(int,int,int,bool);
-    int getLastDuration(char*);
+    int getLastDuration(const char*);
     int getMaxTravelTime(void);
-    char* getValvePosition(void); 
+    const char* getValvePosition(void); 
     void setMaxTraveltime(int);
-    char* setValvePosition(char*);
+    const char* setValvePosition(const char*);
   ////////////// library-accessible "private" interface
   private:
     int value;

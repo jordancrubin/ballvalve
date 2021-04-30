@@ -5,8 +5,9 @@
   Functionality requires the addition of a standard DPDT Relay module
   and 24VDC power supply
   https://www.youtube.com/c/jordanrubin6502
+  Project Video:  https://www.youtube.com/watch?v=yC6QS6Ac-z0
   2020 Jordan Rubin.
-  */
+*/
 
 #include "Arduino.h" // Required for Platform.io
 #include "Ballvalve.h"
@@ -14,7 +15,7 @@
 int maxTraveltime;
 unsigned long opentime,closetime;
 bool usePowerRelay = false;
-char version[6] = "1.0.0";
+char version[6] = "1.0.7";
 int defaultMaxtravelTime = 8;
 int openStatus,closeStatus,valveRelay,powerRelay;
 unsigned long currentMillis;
@@ -65,7 +66,7 @@ FIVEWIREVALVE::FIVEWIREVALVE(int RelayGPIOpin, int openStatusGPIOpin, int closeS
 // ----------------------------------------------------------------------------]
 
 // FUNCTION - [getValvePosition] - Returns [OPEN/CLOSED/MIDWAY/ERROR]----------]
-char* FIVEWIREVALVE::getValvePosition(void){
+const char* FIVEWIREVALVE::getValvePosition(void){
   int open_state = digitalRead(openStatus);
   int close_state = digitalRead(closeStatus);
   if (open_state == LOW ){return "OPEN";}
@@ -76,9 +77,9 @@ char* FIVEWIREVALVE::getValvePosition(void){
 // ----------------------------------------------------------------------------]
 
 // FUNCTION - [getLastDuration] - [OPEN/CLOSE] Returns OPEN/CLOSE time---------]
-int FIVEWIREVALVE::getLastDuration(char* position){
-	  if (position == "OPEN"){return opentime;}
-    else if (position == "CLOSED"){return closetime;}
+int FIVEWIREVALVE::getLastDuration(const char* position){
+  if (strcmp(position,"OPEN")==0){return opentime;}
+    else if (strcmp(position,"CLOSED")==0){return closetime;}
     else {return 0;}
 }
 // ----------------------------------------------------------------------------]
@@ -96,13 +97,13 @@ void FIVEWIREVALVE::setMaxTraveltime(int time){
 // ----------------------------------------------------------------------------]
 
 // FUNCTION - [setValvePosition] -[OPEN/CLOSE]---------------------------------]
-char* FIVEWIREVALVE::setValvePosition(char* position){	
+const char* FIVEWIREVALVE::setValvePosition(const char *position){	
   int count = 0;
   unsigned long starttime;
   unsigned long endtime;
   starttime = millis();
   if (usePowerRelay == true){
-   if (position == "OPEN"){
+     if (strcmp(position,"OPEN")==0){    
       if (strcmp(getValvePosition(),"OPEN")==0){return "Already Open";}
        digitalWrite(powerRelay,HIGH);delay(100); 
        digitalWrite(valveRelay,HIGH);
@@ -116,7 +117,7 @@ char* FIVEWIREVALVE::setValvePosition(char* position){
     opentime = (endtime - starttime) /1000; 
     return "OPENED";
     }
-    if (position == "CLOSED"){
+      if (strcmp(position,"CLOSED")==0){ 
       if (strcmp(getValvePosition(),"CLOSED")==0){return "Already Closed";}
       digitalWrite(powerRelay,HIGH);delay(100);
       digitalWrite(valveRelay,LOW); 
@@ -133,7 +134,7 @@ char* FIVEWIREVALVE::setValvePosition(char* position){
     return "ERR";
   }
   else { 
-    if (position == "OPEN"){
+      if (strcmp(position,"OPEN")==0){ 
       if (strcmp(getValvePosition(),"OPEN")==0){return "Already Open";}
        digitalWrite(valveRelay,HIGH);
       while (strcmp(getValvePosition(),"OPEN")!=0){
@@ -145,7 +146,7 @@ char* FIVEWIREVALVE::setValvePosition(char* position){
     opentime = (endtime - starttime) /1000;    
     return "OPENED";
     }
-    if (position == "CLOSED"){
+    if (strcmp(position,"CLOSED")==0){ 
       if (strcmp(getValvePosition(),"CLOSED")==0){return "Already Closed";}
       digitalWrite(valveRelay,LOW); 
       while (strcmp(getValvePosition(),"CLOSED")!=0){
