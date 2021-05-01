@@ -1,4 +1,5 @@
 /*
+  Rename file to main.cpp to compile example in platform.io
   testvalve.ino/cpp - Test programme for the AIR/WATER/GAS Ball Valves 
   This one designed around the U.S.SOLID 5 Wire 
   USS-MSV00015 5 Wire Model with Full OPEN/CLOSED Status 
