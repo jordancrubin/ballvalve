@@ -1,4 +1,5 @@
 /*
+  Rename file to main.cpp to compile example in platform.io
   testvalve.ino/cpp - Test programme for the AIR/WATER/GAS Ball Valves 
   This one designed around the U.S.SOLID 5 Wire 
   USS-MSV00015 5 Wire Model with Full OPEN/CLOSED Status 
@@ -48,7 +49,7 @@ void loop() {
     Serial.print("OPENING REQUEST-> ");
     // Orchestrates the opening of the valve, incorperates the OPEN/CLOSE sense and maxtime
     Serial.println(thisValve.setValvePosition("OPEN"));
-    delay(45000);
+    delay(20000);
     Serial.print("CLOSING REQUEST-> ");
     // Orchestrates the closing of the valve, incorperates the OPEN/CLOSE sense and maxtime
     Serial.println(thisValve.setValvePosition("CLOSED"));
@@ -57,5 +58,5 @@ void loop() {
     Serial.print("Last OPEN  took: "); Serial.print(thisValve.getLastDuration("OPEN")); Serial.println(" seconds.");
     Serial.print("Last CLOSE took: "); Serial.print(thisValve.getLastDuration("CLOSED")); Serial.println(" seconds.");
     Serial.println("|------------------------END CYCLE\n");
-    delay(45000);
+    delay(20000);
 }

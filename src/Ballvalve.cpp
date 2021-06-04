@@ -15,7 +15,6 @@
 int maxTraveltime;
 unsigned long opentime,closetime;
 bool usePowerRelay = false;
-char version[6] = "1.0.8";
 int defaultMaxtravelTime = 8;
 int openStatus,closeStatus,valveRelay,powerRelay;
 unsigned long currentMillis;
@@ -102,63 +101,23 @@ const char* FIVEWIREVALVE::setValvePosition(const char *position){
   unsigned long starttime;
   unsigned long endtime;
   starttime = millis();
-  if (usePowerRelay == true){
-     if (strcmp(position,"OPEN")==0){    
-      if (strcmp(getValvePosition(),"OPEN")==0){return "Already Open";}
-       digitalWrite(powerRelay,HIGH);delay(100); 
-       digitalWrite(valveRelay,HIGH);
-      while (strcmp(getValvePosition(),"OPEN")!=0){
-        delay(1000);
-        if (count > maxTraveltime){digitalWrite(powerRelay,LOW); return "Error";}
-        count++;
-      }
-    digitalWrite(powerRelay,LOW);
-    endtime = millis(); 
-    opentime = (endtime - starttime) /1000; 
-    return "OPENED";
-    }
-      if (strcmp(position,"CLOSED")==0){ 
-      if (strcmp(getValvePosition(),"CLOSED")==0){return "Already Closed";}
-      digitalWrite(powerRelay,HIGH);delay(100);
-      digitalWrite(valveRelay,LOW); 
-      while (strcmp(getValvePosition(),"CLOSED")!=0){
-        delay(1000);
-        if (count > maxTraveltime){digitalWrite(powerRelay,LOW); return "Error";}
-        count++;
-      }   
-    digitalWrite(powerRelay,LOW);
-    endtime = millis();
-    closetime = (endtime - starttime) / 1000;  
-    return "CLOSED";   
-    }
-    return "ERR";
-  }
-  else { 
-      if (strcmp(position,"OPEN")==0){ 
-      if (strcmp(getValvePosition(),"OPEN")==0){return "Already Open";}
-       digitalWrite(valveRelay,HIGH);
-      while (strcmp(getValvePosition(),"OPEN")!=0){
-        delay(1000);
-        if (count > maxTraveltime){return "Error";}
-        count++;
-      }
-    endtime = millis(); 
-    opentime = (endtime - starttime) /1000;    
-    return "OPENED";
-    }
-    if (strcmp(position,"CLOSED")==0){ 
-      if (strcmp(getValvePosition(),"CLOSED")==0){return "Already Closed";}
-      digitalWrite(valveRelay,LOW); 
-      while (strcmp(getValvePosition(),"CLOSED")!=0){
-        delay(1000);
-        if (count > maxTraveltime){return "Error";}
-        count++;
-      }   
-    endtime = millis();
-    closetime = (endtime - starttime) / 1000;
-    return "CLOSED";   
-    }
-    return "ERR";
-  }
+  bool hiLow = 1;
+  if (strcmp(position,"CLOSED")==0){hiLow=0;}
+  if (strcmp(getValvePosition(),position)==0){return "Already there";}
+  if (usePowerRelay == true){digitalWrite(powerRelay,HIGH);delay(100);}
+  digitalWrite(valveRelay,hiLow);
+  while (strcmp(getValvePosition(),position)!=0){
+    delay(1000);
+    if (count > maxTraveltime){
+      if (usePowerRelay == true){digitalWrite(powerRelay,LOW);} 
+           return "Error";
+      }    
+      count++;
+  }  
+  if (usePowerRelay == true){digitalWrite(powerRelay,LOW);} 
+  endtime = millis(); 
+  if (strcmp(position,"OPEN")==0){opentime = (endtime - starttime) /1000;}
+  else {closetime = (endtime - starttime) /1000;}    
+  return position;
 }
 // ----------------------------------------------------------------------------]
